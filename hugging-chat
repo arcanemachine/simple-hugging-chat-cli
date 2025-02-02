@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+# Get the absolute file path (in case is this script is being run as a symlink)
+true_path_to_current_file=$(readlink -f "$0")
+absolute_repo_directory=$(dirname "$true_path_to_current_file")
+
+# Activate the virtualenv
+cd "$absolute_repo_directory"
+. venv/bin/activate
+
+# Get the email address by sourcing the config file
+set -a
+. ./config.env
+set +a
+
+python3 hugging_chat.py "$*"
