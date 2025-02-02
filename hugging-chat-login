@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")"
+. venv/bin/activate
+
+printf "Enter your HuggingChat login email: "
+read -r email
+
+printf "Password: "
+stty -echo
+read -r password
+stty echo
+printf "\n"
+
+echo "Logging in..."
+
+if python3 hugging_chat_login.py "$email" "$password"; then
+  echo "Login successful"
+fi

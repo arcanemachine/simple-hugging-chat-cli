@@ -1,0 +1,6 @@
+__pycache__/
+
+*gitignored*
+/cookies/
+/venv/
+config.env
