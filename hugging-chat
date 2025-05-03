@@ -15,4 +15,4 @@ set -a
 . ./config.env
 set +a
 
-python3 hugging_chat.py "$*"
+python3 hugging_chat.py "/nothink Be brief. ${*}"
