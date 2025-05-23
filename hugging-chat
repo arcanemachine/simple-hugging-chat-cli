@@ -8,11 +8,17 @@ absolute_repo_directory=$(dirname "$true_path_to_current_file")
 
 # Activate the virtualenv
 cd "$absolute_repo_directory"
+# shellcheck disable=SC1091
 . venv/bin/activate
 
 # Get the email address by sourcing the config file
 set -a
+  # shellcheck disable=SC1091
 . ./config.env
 set +a
 
-python3 hugging_chat.py "/nothink Be brief. ${*}"
+if [ -n "$SYSTEM_PROMPT" ]; then
+  SYSTEM_PROMPT="You are a helpful assistant. Be brief. /no_think"
+fi
+
+python3 hugging_chat.py "$SYSTEM_PROMPT ${*}"
