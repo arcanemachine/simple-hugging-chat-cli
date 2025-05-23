@@ -17,7 +17,7 @@ set -a
 . ./config.env
 set +a
 
-if [ -n "$SYSTEM_PROMPT" ]; then
+if [ -z "$SYSTEM_PROMPT" ]; then
   SYSTEM_PROMPT="You are a helpful assistant. Be brief. /no_think"
 fi
 

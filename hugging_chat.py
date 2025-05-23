@@ -20,14 +20,23 @@ def get_chatbot_instance():
         default_llm=default_llm)
 
 def send_message(chatbot, message):
-    for resp in chatbot.chat(message, stream=True):
-        if resp is not None:
-            # Print each token to the terminal as the response is streamed
-            sys.stdout.write(resp["token"])
-            sys.stdout.flush()
-        else:
-            print()
-            sys.exit(0)
+    stream_response = False if os.environ.get("STREAM_RESPONSE") == "false" else True
+
+    if stream_response == True:
+        for resp in chatbot.chat(message, stream=True):
+            if resp is not None:
+                # The first token from a response is 2 newline characters. Skip them
+                if resp["token"] != "\n\n":
+                    # Print each token to the terminal as the response is streamed
+                    sys.stdout.write(resp["token"])
+
+                sys.stdout.flush()
+            else:
+                print()
+                sys.exit(0)
+    else:
+        print(chatbot.chat(message).get_final_text().strip())
+        sys.exit(0)
 
 if __name__ == "__main__":
     chatbot = get_chatbot_instance()
