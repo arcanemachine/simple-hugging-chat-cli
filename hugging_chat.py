@@ -8,7 +8,7 @@ from hugchat.login import Login
 
 def get_chatbot_instance():
     # Configurable items
-    default_llm = os.environ.get("HUGGING_CHAT_DEFAULT_LLM", "Qwen/Qwen2.5-72B-Instruct")
+    default_llm = os.environ.get("HUGGING_CHAT_DEFAULT_LLM", "Qwen/Qwen3-235B-A22B")
     email = os.environ["HUGGING_CHAT_EMAIL"]
 
     # Set up cookies
