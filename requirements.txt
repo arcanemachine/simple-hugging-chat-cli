@@ -1,2 +1,2 @@
-hugchat==0.4.19
+hugchat==0.5.1
 requests==2.32.3
